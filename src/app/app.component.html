@@ -1,7 +1,7 @@
 <div class="wrapper">
   
-  <!-- Project listing -->
-  <div class="col-md-3 bg-primary">
+  <!-- Project listing --> 
+  <div class="col-md-3 bg-primary" style="height: 100vh;">
     <div class="col-md-12">
       <app-project-list></app-project-list>
     </div>
@@ -12,18 +12,20 @@
     <div class="col-md-12 pt-3">
       
       <!-- Header Section -->
-      <div class="row">
+      <div class="row mb-2">
         <div class="col p-3 bg-success mr-2 rounded shadow p-3 mb-1 bg-white" style="height: 15vh;">
-          <div class="col-md-12">
+          <div class="col-md-12 p-3">
 
-            <p>PROJECTS</p>
+            <h1 class="text-white">PROJECTS</h1>
 
           </div>
         </div>
-        <div class="col-2 p-3 bg-success rounded shadow p-3 mb-1 bg-white" style="height: 15vh;">
-          <div class="col-md-12">
 
-            <p>Welcome</p>
+        <div class="col-2 p-3 bg-success rounded shadow p-3 mb-1 bg-white" style="height: 15vh;">
+          <div class="col-md-12 p-3">
+
+            <p class="text-white">Welcome</p>
+            
           
           </div>
 
@@ -31,31 +33,31 @@
       </div>
 
        <!-- Project Details (Body) Section -->
-       <ul class="nav nav-pills mt-2">
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" href="#">Details</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" href="#">Resources</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" href="#">Invoice</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" href="#">Status</a>
-        </li>
-      </ul>
-      
-      <!-- Project Details (Body) Section -->
-      <div class="row bg-primary rounded" style="height: 63vh;">
+      <div class="row">
+        <ul class="nav nav-pills mt-2 mb-2 pb-1">
+          <li class="nav-item bg-primary mr-2 rounded">
+            <a class="nav-link" routerLinkActive="active" href="#">Details</a>
+          </li>
+          <li class="nav-item bg-primary mr-2 rounded">
+            <a class="nav-link" routerLinkActive="active" href="#">Resources</a>
+          </li>
+          <li class="nav-item bg-primary mr-2 rounded">
+            <a class="nav-link" routerLinkActive="active" href="#">Invoice</a>
+          </li>
+          <li class="nav-item bg-primary rounded">
+            <a class="nav-link" routerLinkActive="active" href="#">Status</a>
+          </li>
+        </ul>
+      </div>
+    
+      <!-- Project Tabs (Body) Section -->
+      <div class="row bg-primary rounded" style="height: 60vh;">
         <div class="col-md-12">
-        
-          <h1>PROJECT DETAILS BODYYY</h1>
-
+          <!-- Load project tabs -->
         </div>
       </div>
 
-      <div class="row bg-success mt-3 p-3 rounded">Footer</div>
+      <div class="row bg-success mt-3 p-3 rounded" style="height: 9vh;"></div>
     
     </div>
 
