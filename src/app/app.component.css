@@ -42,3 +42,7 @@ h1 {
     background-color: #49d8a0 !important;
     box-shadow: 1px -1px 8px rgba(0, 0, 0, 0.3);
 }
+
+.tab-height {
+    overflow-y: scroll;
+}

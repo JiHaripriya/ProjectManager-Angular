@@ -1,0 +1,9 @@
+.heading {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.col {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
