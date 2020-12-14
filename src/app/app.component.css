@@ -1,3 +1,30 @@
+/* :root {
+    --primary-color: var( #49d8a0);
+    --secondary-color: var(rgb(246, 247, 251));
+    --highlight: var(rgb(208, 209, 212));
+} */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
 .mr-0 {
     margin-right: 0px !important;
+}
+
+.mt-0 {
+    margin-top: 0px !important;
+}
+
+.bg-primary {
+    background-color:#fff !important;
+}
+
+.bg-success {
+    background-color:#49d8a0 !important;
+}
+
+.bg-dark {
+    background-color:rgb(246, 247, 251) !important;
 }
