@@ -25,17 +25,20 @@
     background-color:#49d8a0 !important;
 }
 
-.bg-dark {
+.bg-body {
     background-color:rgb(246, 247, 251) !important;
-}
-
-hr {
-    margin-top: 5px; 
-    margin-bottom: 5px;
-    border: 0;
-    border-top: 1px solid rgba(0,0,0,.1);
 }
 
 h1 {
     font-size: 150%;
+}
+
+.nav-link {
+    color: #000000;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #49d8a0 !important;
+    box-shadow: 1px -1px 8px rgba(0, 0, 0, 0.3);
 }

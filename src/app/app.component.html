@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div class="col-md-9 bg-dark">
+  <div class="col-md-9 bg-body">
 
     <div class="col-md-12 pt-3">
       
@@ -22,10 +22,9 @@
         </div>
 
         <div class="col-2 p-3 bg-success rounded shadow p-3 mb-1 bg-white" style="height: 15vh;">
-          <div class="col-md-12 p-3">
+          <div class="col-md-12 p-2 text-center">
 
             <p class="text-white">Welcome</p>
-            
           
           </div>
 
@@ -34,26 +33,16 @@
 
        <!-- Project Details (Body) Section -->
       <div class="row">
-        <ul class="nav nav-pills mt-2 mb-2 pb-1">
-          <li class="nav-item bg-primary mr-2 rounded">
-            <a class="nav-link" routerLinkActive="active" href="#">Details</a>
-          </li>
-          <li class="nav-item bg-primary mr-2 rounded">
-            <a class="nav-link" routerLinkActive="active" href="#">Resources</a>
-          </li>
-          <li class="nav-item bg-primary mr-2 rounded">
-            <a class="nav-link" routerLinkActive="active" href="#">Invoice</a>
-          </li>
-          <li class="nav-item bg-primary rounded">
-            <a class="nav-link" routerLinkActive="active" href="#">Status</a>
-          </li>
-        </ul>
+        <app-project-tabs></app-project-tabs>
       </div>
+
+      <div class="row bg-secondary mb-1" style="height:0.1px;"><hr></div>
     
       <!-- Project Tabs (Body) Section -->
       <div class="row bg-primary rounded" style="height: 60vh;">
         <div class="col-md-12">
           <!-- Load project tabs -->
+          <router-outlet></router-outlet>
         </div>
       </div>
 
