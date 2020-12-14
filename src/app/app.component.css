@@ -46,3 +46,15 @@ h1 {
 .tab-height {
     overflow-y: scroll;
 }
+
+.circular {
+    border: 0.4px solid #fff;
+    border-radius: 50%;
+    height: 20vh;
+    width: 20vh;
+    background: linear-gradient(to top, #49d8a0 40%, #fff 1%);
+}
+
+.border-success {
+    border-color: #49d8a0 !important;
+}
