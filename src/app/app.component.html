@@ -13,28 +13,31 @@
       
       <!-- Header Section -->
       <div class="row mb-2">
+        
         <div class="col p-3 bg-success mr-2 rounded shadow p-3 mb-1 bg-white" style="height: 15vh;">
           <div class="col-md-12 p-3">
-
             <h1 class="text-white">PROJECTS</h1>
-
           </div>
         </div>
 
         <div class="col-2 p-3 bg-success rounded shadow p-3 mb-1 bg-white" style="height: 15vh;">
           <div class="col-md-12 p-2 text-center">
-
             <p class="text-white">Welcome</p>
-          
           </div>
-
         </div>
+
       </div>
 
        <!-- Project Details (Body) Section -->
-      <div class="row">
+      <div class="row d-flex justify-content-between">
         <app-project-tabs></app-project-tabs>
+        <ul class="nav nav-pills mt-2 pb-1">
+          <li class="nav-item bg-primary rounded">
+              <a class="nav-link" routerLinkActive="active">Edit</a>
+          </li>
+        </ul>
       </div>
+
 
       <div class="row bg-secondary mb-1" style="height:0.1px;"><hr></div>
     
@@ -47,7 +50,7 @@
       </div>
 
       <div class="row bg-success mt-3 p-3 rounded" style="height: 9vh;"></div>
-    
+
     </div>
 
   </div>
