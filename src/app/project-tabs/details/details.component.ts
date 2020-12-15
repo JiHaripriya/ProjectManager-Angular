@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormServiceService } from 'src/app/shared/services/form-service.service';
 
 @Component({
   selector: 'app-details',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private formService: FormServiceService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  editProjectForm(){
+    this.formService.isFormStatus.next(1);
+    this.router.navigate(['/projectForm/edit']);
+  }
 }

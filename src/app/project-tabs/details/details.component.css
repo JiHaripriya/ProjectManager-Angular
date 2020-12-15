@@ -7,3 +7,12 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
+
+.editIcon {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

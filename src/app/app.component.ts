@@ -11,11 +11,12 @@ import { FormServiceService } from './shared/services/form-service.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   isForm: number;
-  isProjectDetails = true;
+  isProjectDetails = false;
   subscription: Subscription;
   constructor(private formService: FormServiceService, private router: Router) {}
 
   ngOnInit() {
+
     this.subscription = this.formService.isFormStatus.subscribe(
       status => {
         this.isForm = status;
@@ -25,11 +26,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  editProjectForm(){
-    this.formService.isFormStatus.next(1);
-    this.router.navigate(['/projectForm/edit']);
   }
 
 }

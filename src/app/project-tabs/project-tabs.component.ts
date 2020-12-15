@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormServiceService } from '../shared/services/form-service.service';
+
 
 @Component({
   selector: 'app-project-tabs',
@@ -7,9 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectTabsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private formService: FormServiceService, private router: Router) { }
 
   ngOnInit(): void {
   }
+
 
 }
