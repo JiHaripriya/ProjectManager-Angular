@@ -10,6 +10,33 @@
     width: 40% !important;
 }
 
-.w-95{
-    width: 95% !important;
+.w-93 {
+    width: 93% !important;
+}
+
+input[type="range"],
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+.slider {
+    background-color: #49d8a0;
+    height: 5px;
+    border-radius: 5px;
+}
+
+::-webkit-slider-thumb {
+    position: relative;
+    top: 0px;
+    z-index: 1;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid  #49d8a0;
 }
