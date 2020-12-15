@@ -96,22 +96,34 @@ th {
     box-shadow: 0 0 10px #00000050;
 }
 
+.btn-secondary:focus {
+    color: #000000;
+}
+
+.btn-secondary:focus,
+.btn-primary:focus {
+    outline: transparent !important;
+    border: transparent !important;
+}
+
 .btn-primary:hover {
     border-color: transparent !important;
     box-shadow: 0 0 10px #00000050;
 }
 
-.btn-primary:focus {
-    outline: transparent !important;
-}
-
 .project-form {
     position: fixed;
-    top: 10vh;
-    left: 35vw;
+    top: 0;
+    left: 0;
+    padding: 20px 30% 20px 30%;
     background-color: white;
+    background-image: linear-gradient(to bottom, white 0%, white 100%), linear-gradient(to bottom, #49d8a1b7 0%, white 100%);
+    background-clip: content-box, padding-box;
 }
 
+.project-form form {
+    max-width: 100%;
+}
 
 @font-face {
     font-family: 'Manrope-ExtraBold';

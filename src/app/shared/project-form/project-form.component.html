@@ -1,8 +1,8 @@
 <!-- (ngSubmit)="addToList(f)" #f="ngForm" -->
 
-<form class="col-md-4 border border-success rounded shadow project-form"> 
+<form class="col-md-6 shadow"> 
     
-    <div class="p-3">
+    <div class="p-5">
 
         <div class="row border-bottom">
             <h4>Add Project</h4>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="row justify-content-between">
-            <button class="btn btn-secondary w-40" type="button" > Cancel </button>
+            <button class="btn btn-secondary w-40" type="button" (click)="cancelProject()"> Cancel </button>
             <button class="btn btn-primary w-40" type="submit" > Create Project </button> <!--[disabled]="!f.valid"   {{ editMode ? 'Update' : 'Add' }}-->
         </div>
     </div>
