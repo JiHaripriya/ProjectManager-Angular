@@ -111,6 +111,10 @@ th {
     box-shadow: 0 0 10px #00000050;
 }
 
+.w-40 {
+    width: 40% !important;
+}
+
 .project-form {
     position: fixed;
     top: 0;
