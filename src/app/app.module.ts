@@ -9,6 +9,9 @@ import { ResourcesComponent } from './project-tabs/resources/resources.component
 import { InvoiceComponent } from './project-tabs/invoice/invoice.component';
 import { StatusComponent } from './project-tabs/status/status.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ResourceFormComponent } from './shared/resource-form/resource-form.component';
+import { ProjectFormComponent } from './shared/project-form/project-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,15 @@ import { AppRoutingModule } from './app-routing.module';
     DetailsComponent,
     ResourcesComponent,
     InvoiceComponent,
-    StatusComponent
+    StatusComponent,
+    ResourceFormComponent,
+    ProjectFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

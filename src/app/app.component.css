@@ -83,6 +83,36 @@ th {
     border-color: #49d8a0;
 }
 
+.btn-secondary {
+    color: #000000;
+    background-color: #fff !important;
+    border-color: #d84981 !important;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #d84981 !important;
+    box-shadow: 0 0 10px #00000050;
+}
+
+.btn-primary:hover {
+    border-color: transparent !important;
+    box-shadow: 0 0 10px #00000050;
+}
+
+.btn-primary:focus {
+    outline: transparent !important;
+}
+
+.project-form {
+    position: fixed;
+    top: 10vh;
+    left: 35vw;
+    background-color: white;
+}
+
+
 @font-face {
     font-family: 'Manrope-ExtraBold';
     src: url('../assets/fonts/Manrope-ExtraBold.woff2') format('woff2'),
