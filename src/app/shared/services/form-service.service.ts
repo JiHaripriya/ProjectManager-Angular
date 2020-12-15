@@ -7,5 +7,6 @@ import { Subject } from 'rxjs';
 export class FormServiceService {
 
   isFormStatus = new Subject<number>();
+  
   constructor() { }
 }

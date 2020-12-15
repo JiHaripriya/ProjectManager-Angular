@@ -13,7 +13,9 @@ const routes: Routes = [
   {path: 'resources', component: ResourcesComponent},
   {path: 'invoice', component: InvoiceComponent},
   {path: 'status', component: StatusComponent},
-  {path: 'projectForm', component: ProjectFormComponent}
+  {path: 'projectForm', component: ProjectFormComponent, children: [
+    {path: 'edit', component: ProjectFormComponent}
+  ]}
 ];
 
 @NgModule({
