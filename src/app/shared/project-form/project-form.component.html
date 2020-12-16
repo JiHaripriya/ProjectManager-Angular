@@ -14,8 +14,8 @@
       />
       <span
         *ngIf="
-          !projectForm.get('projectName').valid &&
-          projectForm.get('projectName').touched
+          (!projectForm.get('projectName').valid &&
+          projectForm.get('projectName').touched)
         "
         class="text-danger small"
       >
@@ -33,8 +33,8 @@
       />
       <span
         *ngIf="
-          !projectForm.get('clientName').valid &&
-          projectForm.get('clientName').touched
+          (!projectForm.get('clientName').valid &&
+          projectForm.get('clientName').touched)
         "
         class="text-danger small"
       >
@@ -55,18 +55,12 @@
         />
         <span
           *ngIf="
-            !projectForm.get('startDate').valid &&
-            projectForm.get('startDate').touched
+            (!projectForm.get('startDate').valid &&
+            projectForm.get('startDate').touched) || startDateError
           "
           class="text-danger small"
         >
           Enter the start date
-        </span>
-        <span
-          *ngIf="startDateError"
-          class="text-danger small"
-        >
-          Enter a valid start date
         </span>
       </div>
 
@@ -81,18 +75,12 @@
         />
         <span
           *ngIf="
-            !projectForm.get('endDate').valid &&
-            projectForm.get('endDate').touched
+            (!projectForm.get('endDate').valid &&
+            projectForm.get('endDate').touched) || endDateError
           "
           class="text-danger small"
         >
-          Enter the end date
-        </span>
-        <span
-          *ngIf="endDateError"
-          class="text-danger small"
-        >
-          End date cannot be past date
+          Enter a valid end date
         </span>
       </div>
     </div>
@@ -123,8 +111,8 @@
       ></textarea>
       <span
         *ngIf="
-          !projectForm.get('description').valid &&
-          projectForm.get('description').touched
+          (!projectForm.get('description').valid &&
+          projectForm.get('description').touched)
         "
         class="text-danger small"
       >
@@ -140,7 +128,7 @@
       >
         Cancel
       </button>
-      <button class="btn btn-primary w-40" type="submit">
+      <button class="btn btn-primary w-40" type="submit" [disabled]="!projectForm.valid">
         {{ buttonText }}
       </button>
     </div>
