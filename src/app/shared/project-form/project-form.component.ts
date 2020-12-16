@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormServiceService } from '../services/form-service.service';
@@ -17,6 +17,8 @@ export class ProjectFormComponent implements OnInit {
   buttonText: string;
   showSlider = false;
   projectForm: FormGroup;
+  startDateError =  false;
+  endDateError = false;
   
   constructor(private formService: FormServiceService, private router: Router) {}
 
@@ -48,12 +50,29 @@ export class ProjectFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.projectForm.value)
+    // Date validations
+    // Start date less than current date check -> Invalid start date
+    if(new Date(this.projectForm.root.get('startDate').value) < new Date()) {
+      this.startDateError = true;
+    }
+    else this.startDateError = false;
+    // End date less than current start date check -> Valid end date
+    if(new Date(this.projectForm.root.get('endDate').value) < new Date(this.projectForm.root.get('startDate').value)) {
+      this.endDateError = true;
+    }
+    else this.endDateError = false;
+
   }
 
   cancelProject(){
     this.formService.isFormStatus.next(0);
     this.router.navigate(['/details']);
+  }
+
+  dateValidator(control : AbstractControl) {
+    if(control){
+      control.root.get('')
+    }
   }
 
 }

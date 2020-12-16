@@ -21,7 +21,7 @@ export class ResourceFormComponent implements OnInit {
   ngOnInit(): void {
 
     // Form button text 
-    if(String(this.router.url).toLocaleLowerCase().includes('edit')){
+    if(String(this.router.url).toLocaleLowerCase().includes('edit')) {
       this.buttonText = 'Update Resource';
     }
     else {
@@ -34,7 +34,7 @@ export class ResourceFormComponent implements OnInit {
       'resourceEmail': new FormControl(null, [Validators.required, Validators.email]),
       'checkboxFlag': new FormControl(null),
       'billableAmount': new FormControl(0, [Validators.required, Validators.pattern('^[0-9]+$')])
-    })
+    });
 
   }
 

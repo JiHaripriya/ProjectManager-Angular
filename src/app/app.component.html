@@ -29,10 +29,14 @@
       </div>
 
        <!-- Project Details (Body) Section -->
-      <div class="row">
+      <div class="row justify-content-between">
 
         <app-project-tabs></app-project-tabs>
-
+        <ul class="nav nav-pills mt-2 pb-1">
+          <li class="nav-item bg-primary mr-2 rounded shadow-sm">
+            <a class="nav-link" (click)="editProjectForm()" style="cursor: pointer;">Edit</a>
+          </li>
+        </ul>
       </div>
 
 
@@ -41,10 +45,8 @@
       <!-- Project Tabs (Body) Section -->
       <div class="row bg-primary rounded tab-height shadow" style="height: 60vh;">
         <div class="col-md-12" [ngClass]="{'project-form': isForm === 1}">
-          
           <!-- Load project tabs -->
-          <router-outlet></router-outlet>
-          
+          <router-outlet></router-outlet>          
         </div>
       </div>
 

@@ -28,4 +28,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  editProjectForm(){
+    this.formService.isFormStatus.next(1);
+    this.router.navigateByUrl('/details/edit');
+  }
+
 }

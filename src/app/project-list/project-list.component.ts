@@ -11,8 +11,7 @@ export class ProjectListComponent implements OnInit {
 
   constructor(private router: Router, private formService: FormServiceService, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   loadProjectForm() {
     this.formService.isFormStatus.next(1); // 1 -> Popup form
