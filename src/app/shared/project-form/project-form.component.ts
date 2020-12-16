@@ -31,7 +31,7 @@ export class ProjectFormComponent implements OnInit {
 
   cancelProject(){
     this.formService.isFormStatus.next(0);
-    this.router.navigate(['/details']);
+    this.router.navigate(['../']);
   }
 
 

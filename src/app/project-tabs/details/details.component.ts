@@ -16,6 +16,6 @@ export class DetailsComponent implements OnInit {
 
   editProjectForm(){
     this.formService.isFormStatus.next(1);
-    this.router.navigate(['/projectForm/edit']);
+    this.router.navigateByUrl('/details/edit');
   }
 }

@@ -1,0 +1,56 @@
+<form class="col-md-6 shadow"> 
+    
+    <div class="p-5">
+
+        <div class="row border-bottom">
+            <h4>Add Status</h4>
+        </div>
+
+        <div class="row form-group mt-3">
+            <label for="date">Date</label>
+            <select name="date" id="date" class="form-control">
+                <option value="7/12/2020">7/12/2020
+                </option>
+            </select>
+        </div>
+
+        <div class="row form-group">
+            <label for="resource">Resource</label>
+            <select name="resource" id="resource" class="form-control">
+                <option value="Name">Name
+                </option>
+            </select>
+        </div>
+
+        <div class="row form-group">
+            <label for="actvitytype">Activity Type</label>
+            <select name="actvitytype" id="actvitytype" class="form-control">
+                <option value="Coding">Coding
+                </option>
+            </select>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-6 pl-0">
+                <label for="hours">Hours</label>
+                <select name="hours" id="hours" class="col-md-12 form-control">
+                    <option value="08">08
+                    </option>
+                </select>
+            </div>
+      
+            <div class="col-md-6 pr-0">
+                <label for="minutes">Minutes</label>
+                <select name="minutes" id="minutes" class="col-md-12 form-control">
+                    <option value="08">08
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row justify-content-between pt-3">
+            <button class="btn btn-secondary w-40" type="button" (click)="cancelStatus()"> Cancel </button>
+            <button class="btn btn-primary w-40" type="submit"> Save Status</button> <!--[disabled]="!f.valid" -->
+        </div>
+    </div>
+</form>

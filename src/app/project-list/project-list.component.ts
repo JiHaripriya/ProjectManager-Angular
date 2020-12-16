@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormServiceService } from '../shared/services/form-service.service';
 
 @Component({
@@ -9,14 +9,14 @@ import { FormServiceService } from '../shared/services/form-service.service';
 })
 export class ProjectListComponent implements OnInit {
 
-  constructor(private router: Router, private formService: FormServiceService) { }
+  constructor(private router: Router, private formService: FormServiceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
   loadProjectForm() {
     this.formService.isFormStatus.next(1); // 1 -> Popup form
-    this.router.navigate(['/projectForm']);
+    this.router.navigateByUrl('/details/add');
   }
 
 }

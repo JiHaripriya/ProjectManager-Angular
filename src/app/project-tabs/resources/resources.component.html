@@ -1,8 +1,8 @@
-  <div class="mt-3">
+<div class="mt-3" *ngIf="!isDelete">
     <button class="btn btn-primary mr-2"  (click)="loadResourceForm()">+</button>Add Resource
 </div>
 
-<table class="mt-4 table">
+<table class="mt-4 table" *ngIf="!isDelete">
     <thead>
         <tr>
             <th class="bg-success">Name</th>
@@ -19,8 +19,8 @@
             <td>Email Address</td>
             <td>True</td>
             <td>100</td>
-            <td>Ed</td>
-            <td>Del</td>
+            <td (click)="editResource()" style="cursor: pointer;">Ed</td>
+            <td (click)="deleteResource()" style="cursor: pointer;">Del</td>
 
         </tr>
         <tr>
@@ -28,16 +28,34 @@
             <td>Email Address</td>
             <td>True</td>
             <td>100</td>
-            <td>Ed</td>
-            <td>Del</td>
+            <td (click)="editResource()" style="cursor: pointer;">Ed</td>
+            <td (click)="deleteResource()" style="cursor: pointer;">Del</td>
         </tr>
         <tr>
             <td>Name</td>
             <td>Email Address</td>
             <td>True</td>
             <td>100</td>
-            <td>Ed</td>
-            <td>Del</td>
+            <td (click)="editResource()" style="cursor: pointer;">Ed</td>
+            <td (click)="deleteResource()" style="cursor: pointer;">Del</td>
         </tr>
     </tbody>
 </table>
+
+<form class="col-md-6 shadow" *ngIf="isDelete">
+    <div class="p-5">
+
+        <div class="row border-bottom">
+            <h4>Delete Resource</h4>
+        </div>
+
+        <div class="row mt-3 justify-content-center">
+            <h6>Confirm Delete ?</h6>
+        </div>
+
+        <div class="row justify-content-between mt-3">
+            <button class="btn btn-secondary w-25" type="button" (click)="cancelDeleteResource()"> Cancel </button>
+            <button class="btn btn-primary w-40" type="submit" > Delete Resource </button>
+        </div>
+    </div>
+</form>

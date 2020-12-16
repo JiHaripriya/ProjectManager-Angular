@@ -26,7 +26,7 @@ export class ResourceFormComponent implements OnInit {
 
   cancelResource(){
     this.formService.isFormStatus.next(0);
-    this.router.navigate(['/resources']);
+    this.router.navigate(['../resources']);
   }
 
 }

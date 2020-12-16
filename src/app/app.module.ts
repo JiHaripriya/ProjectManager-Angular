@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ResourceFormComponent } from './shared/resource-form/resource-form.component';
 import { ProjectFormComponent } from './shared/project-form/project-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StatusFormComponent } from './shared/status-form/status-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     InvoiceComponent,
     StatusComponent,
     ResourceFormComponent,
-    ProjectFormComponent
+    ProjectFormComponent,
+    StatusFormComponent
   ],
   imports: [
     BrowserModule,
