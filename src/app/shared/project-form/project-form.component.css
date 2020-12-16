@@ -36,3 +36,8 @@ input[type="range"]:focus {
     background-color: #fff;
     border: 1px solid  #49d8a0;
 }
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+    border: 1px solid rgb(216, 15, 15);
+}

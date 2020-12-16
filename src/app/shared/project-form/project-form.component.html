@@ -1,51 +1,133 @@
-<!-- (ngSubmit)="addToList(f)" #f="ngForm" -->
-
-<form class="col-md-6 shadow"> 
-    
-    <div class="p-5">
-
-        <div class="row border-bottom">
-            <h4>{{ buttonText }}</h4>
-        </div>
-
-        <div class="row form-group mt-3">
-            <label for="name">Project Name</label>
-            <input type="text" name="name" id="name" class="form-control">
-        </div>
-
-        <div class="row form-group">
-            <label for="name">Client Name</label>
-            <input type="text" name="name" id="name" class="form-control">
-        </div>
-
-        <div class="row form-group">
-            <div class="col-md-6 pl-0">
-              <label for="Start Date">Start Date</label>
-              <input type="date" name="Start Date" id="project-startDate" class="form-control">
-              <p class="project-startDate-error"></p>
-            </div>
-      
-            <div class="col-md-6 pr-0">
-              <label for="End Date">End Date</label>
-              <input type="date" name="End Date" id="project-endDate" class="form-control">
-              <p class="project-endDate-error"></p>
-            </div>
-        </div>
-
-        <div class="row form-group justify-content-between align-items-center" *ngIf="showSlider">
-            <label for="name">Percentage Completed</label>
-            <input type="range" name="range" min="1" max="100" class="w-93 slider" [(ngModel)]="slider">
-            <span>{{ slider }}</span>
-        </div>
-
-        <div class="row form-group">
-            <label for="name">Description</label>
-            <textarea name="description" id="description" rows="5" class="form-control"></textarea>
-        </div>
-
-        <div class="row justify-content-between">
-            <button class="btn btn-secondary w-40" type="button" (click)="cancelProject()"> Cancel </button>
-            <button class="btn btn-primary w-40" type="submit"> {{ buttonText }} </button> <!--[disabled]="!f.valid" -->
-        </div>
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="col-md-6 shadow">
+  <div class="p-5">
+    <div class="row border-bottom">
+      <h4>{{ buttonText }}</h4>
     </div>
+
+    <div class="row form-group mt-3">
+      <label for="name">Project Name</label>
+      <input
+        type="text"
+        formControlName="projectName"
+        id="projectname"
+        class="form-control"
+      />
+      <span
+        *ngIf="
+          !projectForm.get('projectName').valid &&
+          projectForm.get('projectName').touched
+        "
+        class="text-danger small"
+      >
+        Enter the project name
+      </span>
+    </div>
+
+    <div class="row form-group">
+      <label for="name">Client Name</label>
+      <input
+        type="text"
+        formControlName="clientName"
+        id="clientname"
+        class="form-control"
+      />
+      <span
+        *ngIf="
+          !projectForm.get('clientName').valid &&
+          projectForm.get('clientName').touched
+        "
+        class="text-danger small"
+      >
+        Enter the client name
+      </span>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-6 pl-0">
+        <label for="startDate">Start Date</label>
+        <input
+          type="date"
+          formControlName="startDate"
+          id="project-startDate"
+          class="form-control"
+        />
+        <span
+          *ngIf="
+            !projectForm.get('startDate').valid &&
+            projectForm.get('startDate').touched
+          "
+          class="text-danger small"
+        >
+          Enter the start date
+        </span>
+      </div>
+
+      <div class="col-md-6 pr-0">
+        <label for="endDate">End Date</label>
+        <input
+          type="date"
+          formControlName="endDate"
+          id="project-endDate"
+          class="form-control"
+        />
+        <span
+          *ngIf="
+            !projectForm.get('endDate').valid &&
+            projectForm.get('endDate').touched
+          "
+          class="text-danger small"
+        >
+          Enter the end date
+        </span>
+      </div>
+    </div>
+
+    <div
+      class="row form-group justify-content-between align-items-center"
+      *ngIf="showSlider"
+    >
+      <label for="name">Percentage Completed</label>
+      <input
+        type="range"
+        formControlName="range"
+        min="1"
+        max="100"
+        class="w-93 slider"
+        [(ngModel)]="slider"
+      />
+      <span>{{ slider }}</span>
+    </div>
+
+    <div class="row form-group">
+      <label for="name">Description</label>
+      <textarea
+        formControlName="description"
+        id="description"
+        rows="2"
+        class="form-control"
+      ></textarea>
+      <span
+        *ngIf="
+          !projectForm.get('description').valid &&
+          projectForm.get('description').touched
+        "
+        class="text-danger small"
+      >
+        Enter the description
+      </span>
+    </div>
+
+    <div class="row justify-content-between">
+      <button
+        class="btn btn-secondary w-40"
+        type="button"
+        (click)="cancelProject()"
+      >
+        Cancel
+      </button>
+      <button class="btn btn-primary w-40" type="submit">
+        {{ buttonText }}
+      </button>
+    </div>
+  </div>
 </form>
