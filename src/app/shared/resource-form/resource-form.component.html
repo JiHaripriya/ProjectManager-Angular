@@ -27,7 +27,7 @@
           This name is invalid
         </span>
         <span *ngIf="resourceForm.get('resourceName').errors?.minlength">
-          (Hint: Name can only contain alphabets and spaces. Minimum length is
+          (Hint: Only alphabets and spaces allowed. Minimum length is
           2)
         </span>
         <span *ngIf="resourceForm.get('resourceName').errors['required']">
@@ -96,7 +96,7 @@
       >
         Cancel
       </button>
-      <button class="btn btn-primary w-40" type="submit">
+      <button class="btn btn-primary w-40" type="submit" [disabled]="!resourceForm.valid">
         {{ buttonText }}
       </button>
     </div>

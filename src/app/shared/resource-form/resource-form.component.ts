@@ -45,6 +45,7 @@ export class ResourceFormComponent implements OnInit {
 
   onSubmit(){
     console.log(this.resourceForm);
+    this.resourceForm.reset();
   }
 
 }
