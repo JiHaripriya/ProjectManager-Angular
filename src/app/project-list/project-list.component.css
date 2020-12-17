@@ -47,9 +47,7 @@ hr {
     transition: all 0.2s ease;
 }
 
-.border-success {
-    border-color: #d84981 !important;
-}
+
 
 .add-project-btn {
     margin-bottom: 10px;
@@ -67,7 +65,13 @@ hr {
 
 .circular {
     border-radius: 50%;
-    height: 70px;
-    width: 70px;
-    background: linear-gradient(to top, #d84981 40%, #fff 1%) !important;
+    height: 75px;
+    width: 75px;
+    background: linear-gradient(to top, #49d8a0 40%, #fff 1%) !important;
+}
+
+.inner {
+    padding: 9px 6px;
+    border-radius: 50%;
+    background-color: #fff;
 }

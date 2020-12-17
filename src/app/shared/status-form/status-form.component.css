@@ -1,4 +1,8 @@
 input.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched {
+select.ng-invalid.ng-touched {
     border: 1px solid rgb(216, 15, 15);
+}
+
+.form-control {
+    height: calc(1.35em + .65rem + 2px);
 }

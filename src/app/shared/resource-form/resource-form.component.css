@@ -1,3 +1,7 @@
 input.ng-touched.ng-invalid {
     border: 1px solid red;
 }
+
+.form-control {
+    height: calc(1.3em + .65rem + 2px);
+}

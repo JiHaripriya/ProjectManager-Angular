@@ -2,45 +2,51 @@
     <button class="btn btn-primary mr-2"  (click)="loadResourceForm()">+</button>Add Resource
 </div>
 
-<table class="mt-4 table" *ngIf="!isDelete">
-    <thead>
-        <tr>
-            <th class="bg-success">Name</th>
-            <th class="bg-success">Email</th>
-            <th class="bg-success">Billable</th> 
-            <th class="bg-success">Rate Per Hour</th>           
-        </tr>
-    </thead>
-
-    <!-- Dynamically populate table body -->
-    <tbody>
-        <tr>
-            <td>Name</td>
-            <td>Email Address</td>
-            <td>True</td>
-            <td>100</td>
-            <td (click)="editResource()" style="cursor: pointer;">Ed</td>
-            <td (click)="deleteResource()" style="cursor: pointer;">Del</td>
-
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>Email Address</td>
-            <td>True</td>
-            <td>100</td>
-            <td (click)="editResource()" style="cursor: pointer;">Ed</td>
-            <td (click)="deleteResource()" style="cursor: pointer;">Del</td>
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>Email Address</td>
-            <td>True</td>
-            <td>100</td>
-            <td (click)="editResource()" style="cursor: pointer;">Ed</td>
-            <td (click)="deleteResource()" style="cursor: pointer;">Del</td>
-        </tr>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="mt-4 table" *ngIf="!isDelete">
+        <thead>
+            <tr>
+                <th class="bg-success">Name</th>
+                <th class="bg-success">Email</th>
+                <th class="bg-success">Role</th>
+                <th class="bg-success">Billable</th> 
+                <th class="bg-success">Rate Per Hour</th>           
+            </tr>
+        </thead>
+    
+        <!-- Dynamically populate table body -->
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>Email Address</td>
+                <td>Engineer</td>
+                <td>True</td>
+                <td>100</td>
+                <td (click)="editResource()" style="cursor: pointer;" class="icons"><img src="../assets/images/edit-icon.PNG" alt="" style="max-height: 25px;" class="img-responsive edit-icon"></td>
+                <td (click)="deleteResource()" style="cursor: pointer;"  class="icons"><img src="../assets/images/delete-icon.PNG" alt="" style="max-height: 25px; margin: 0 auto;" class="img-responsive edit-icon"></td>
+    
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Email Address</td>
+                <td>Engineer</td>
+                <td>True</td>
+                <td>100</td>
+                <td (click)="editResource()" style="cursor: pointer;"><img src="../assets/images/edit-icon.PNG" alt="" style="max-height: 25px; margin: 0 auto;" class="img-responsive edit-icon"></td>
+                <td (click)="deleteResource()" style="cursor: pointer;"><img src="../assets/images/delete-icon.PNG" alt="" style="max-height: 25px; margin: 0 auto;" class="img-responsive edit-icon"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Email Address</td>
+                <td>Engineer</td>
+                <td>True</td>
+                <td>100</td>
+                <td (click)="editResource()" style="cursor: pointer;"><img src="../assets/images/edit-icon.PNG" alt="" style="max-height: 25px; margin: 0 auto;" class="img-responsive edit-icon"></td>
+                <td (click)="deleteResource()" style="cursor: pointer;"><img src="../assets/images/delete-icon.PNG" alt="" style="max-height: 25px; margin: 0 auto;" class="img-responsive edit-icon"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 <form class="col-md-6 shadow" *ngIf="isDelete">
     <div class="p-5">

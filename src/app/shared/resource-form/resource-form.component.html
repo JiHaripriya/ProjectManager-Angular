@@ -3,7 +3,7 @@
   [formGroup]="resourceForm"
   (ngSubmit)="onSubmit()"
 >
-  <div class="p-5">
+  <div class="p-4">
     <div class="row border-bottom">
       <h4>{{ buttonText }}</h4>
     </div>
@@ -56,6 +56,30 @@
         </span>
         <span *ngIf="resourceForm.get('resourceEmail').errors['email']">
           Invalid email
+        </span>
+      </span>
+    </div>
+
+    <div class="row form-group mt-3">
+      <label for="name">Role</label>
+      <input
+        type="text"
+        id="role"
+        class="form-control"
+        formControlName="role"
+      />
+      <span
+        *ngIf="
+          !resourceForm.get('role').valid &&
+          resourceForm.get('role').touched
+        "
+        class="help-block text-danger small"
+      >
+        <span *ngIf="resourceForm.get('role').errors?.pattern">
+          Invalid Role
+        </span>
+        <span *ngIf="resourceForm.get('role').errors['required']">
+          This field is required!
         </span>
       </span>
     </div>

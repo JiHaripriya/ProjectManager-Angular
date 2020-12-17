@@ -32,6 +32,7 @@ export class ResourceFormComponent implements OnInit {
     this.resourceForm = new FormGroup({
       'resourceName': new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z ]+$'), Validators.minLength(2)]),
       'resourceEmail': new FormControl(null, [Validators.required, Validators.email]),
+      'role': new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z ]+$')]),
       'checkboxFlag': new FormControl(null),
       'billableAmount': new FormControl(0, [Validators.required, Validators.pattern('^[0-9]+$')])
     });

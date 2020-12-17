@@ -32,9 +32,9 @@
       <div class="row justify-content-between">
 
         <app-project-tabs></app-project-tabs>
-        <ul class="nav nav-pills mt-2 pb-1">
-          <li class="nav-item bg-primary mr-2 rounded shadow-sm">
-            <a class="nav-link" (click)="editProjectForm()" style="cursor: pointer;">Edit</a>
+        <ul class="nav nav-pills mt-2" style="max-height: 40px;">
+          <li class="nav-item bg-primary rounded shadow-sm p-1 pt-2 pr-3 pl-3">
+            <a (click)="editProjectForm()" style="cursor: pointer;"><img src="../assets/images/edit-icon.PNG" alt="" style="max-height: 25px; margin: 0 auto;" class="img-responsive edit-icon"></a>
           </li>
         </ul>
       </div>

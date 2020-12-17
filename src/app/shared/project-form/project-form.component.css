@@ -41,3 +41,15 @@ input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
     border: 1px solid rgb(216, 15, 15);
 }
+
+
+.form-control {
+    height: calc(1.3em + .65rem + 2px);
+}
+
+textarea {
+    height: calc(5em + .65rem + 2px);
+    width: 100%;
+    outline: none;
+    border: 1px solid #ced4da;
+}
