@@ -1,56 +1,109 @@
-<form class="col-md-6 shadow"> 
-    
-    <div class="p-5">
-
-        <div class="row border-bottom">
-            <h4>Add Status</h4>
-        </div>
-
-        <div class="row form-group mt-3">
-            <label for="date">Date</label>
-            <select name="date" id="date" class="form-control">
-                <option value="7/12/2020">7/12/2020
-                </option>
-            </select>
-        </div>
-
-        <div class="row form-group">
-            <label for="resource">Resource</label>
-            <select name="resource" id="resource" class="form-control">
-                <option value="Name">Name
-                </option>
-            </select>
-        </div>
-
-        <div class="row form-group">
-            <label for="actvitytype">Activity Type</label>
-            <select name="actvitytype" id="actvitytype" class="form-control">
-                <option value="Coding">Coding
-                </option>
-            </select>
-        </div>
-
-        <div class="row form-group">
-            <div class="col-md-6 pl-0">
-                <label for="hours">Hours</label>
-                <select name="hours" id="hours" class="col-md-12 form-control">
-                    <option value="08">08
-                    </option>
-                </select>
-            </div>
-      
-            <div class="col-md-6 pr-0">
-                <label for="minutes">Minutes</label>
-                <select name="minutes" id="minutes" class="col-md-12 form-control">
-                    <option value="08">08
-                    </option>
-                </select>
-            </div>
-        </div>
-
-        <div class="row justify-content-between pt-3">
-            <button class="btn btn-secondary w-40" type="button" (click)="cancelStatus()"> Cancel </button>
-            <button class="btn btn-primary w-40" type="submit"> Save Status</button> <!--[disabled]="!f.valid" -->
-        </div>
+<form class="col-md-6 shadow" [formGroup]="statusForm" (ngSubmit)="onSubmit()">
+  <div class="p-5">
+    <div class="row border-bottom">
+      <h4>Add Status</h4>
     </div>
+
+    <div class="row form-group mt-3">
+      <label for="date">Date</label>
+      <select formControlName="date" id="date" class="form-control">
+        <option *ngFor="let option of dateArray" [value]="option">{{ option }}</option>
+      </select>
+      <span
+        *ngIf="!statusForm.get('date').valid && statusForm.get('date').touched"
+        class="text-danger small"
+      >
+        Select a date
+      </span>
+    </div>
+
+    <div class="row form-group">
+      <label for="resource">Resource</label>
+      <select formControlName="resource" id="resource" class="form-control">
+        <option value="Name">Name</option>
+      </select>
+      <span
+        *ngIf="
+          !statusForm.get('resource').valid &&
+          statusForm.get('resource').touched
+        "
+        class="text-danger small"
+      >
+        Select a resource
+      </span>
+    </div>
+
+    <div class="row form-group">
+      <label for="actvitytype">Activity Type</label>
+      <select
+        formControlName="actvitytype"
+        id="actvitytype"
+        class="form-control"
+      >
+        <option *ngFor="let option of activityTypeList" [value]="option">{{ option }}</option>
+      </select>
+      <span
+        *ngIf="
+          !statusForm.get('actvitytype').valid &&
+          statusForm.get('actvitytype').touched
+        "
+        class="text-danger small"
+      >
+        Select an activity type
+      </span>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-6 pl-0">
+        <label for="hours">Hours</label>
+        <select
+          formControlName="hours"
+          id="hours"
+          class="col-md-12 form-control"
+        >
+          <option *ngFor="let option of hoursSequence" [value]="option">{{ option }}</option>
+        </select>
+        <span
+          *ngIf="
+            !statusForm.get('hours').valid && statusForm.get('hours').touched
+          "
+          class="text-danger small"
+        >
+          Select the no: hour(s)
+        </span>
+      </div>
+
+      <div class="col-md-6 pr-0">
+        <label for="minutes">Minutes</label>
+        <select
+          formControlName="minutes"
+          id="minutes"
+          class="col-md-12 form-control"
+        >
+            <option *ngFor="let option of minuteSequence" [value]="option">{{ option }}</option>
+        </select>
+        <span
+          *ngIf="
+            !statusForm.get('minutes').valid &&
+            statusForm.get('minutes').touched
+          "
+          class="text-danger small"
+        >
+          Select the no: minutes
+        </span>
+      </div>
+    </div>
+
+    <div class="row justify-content-between pt-3">
+      <button
+        class="btn btn-secondary w-40"
+        type="button"
+        (click)="cancelStatusUpdate()"
+      >
+        Cancel
+      </button>
+      <button class="btn btn-primary w-40" type="submit" [disabled]="!statusForm.valid">Save Status</button>
+
+    </div>
+  </div>
 </form>
