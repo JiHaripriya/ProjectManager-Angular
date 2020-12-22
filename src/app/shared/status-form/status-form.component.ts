@@ -58,7 +58,6 @@ export class StatusFormComponent implements OnInit {
 
   cancelStatusUpdate() {
     this.formService.isFormStatus.next(0);
-    this.router.navigate(['/status']);
   }
 
   // Generates dates between a given start and end date (both inclusive) and returns an array of dates

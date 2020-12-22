@@ -10,21 +10,26 @@ import { StatusFormComponent } from './shared/status-form/status-form.component'
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/details', pathMatch: 'full'},
-  {path: 'details', children :[
-    {path: '', component: DetailsComponent, pathMatch: 'full'},
+  {path: '', redirectTo: '/projects/0/details', pathMatch: 'full'},
+  {path: 'projects', children :[
     {path: 'add', component: ProjectFormComponent}, 
-    {path: 'edit', component: ProjectFormComponent},
-  ]},
-  {path: 'resources', children :[
-    {path: '', component: ResourcesComponent, pathMatch: 'full'},
-    {path: 'add', component: ResourceFormComponent}, 
-    {path: 'edit', component: ResourceFormComponent},
-  ]},
-  {path: 'invoice', component: InvoiceComponent},
-  {path: 'status', children: [
-    {path: '', component: StatusComponent, pathMatch: 'full'},
-    {path: 'add', component: StatusFormComponent}
+    {path: ':id', children: [
+      {path: 'details', children: [
+        {path: '', component: DetailsComponent, pathMatch: 'full'},
+        {path: 'edit', component: ProjectFormComponent}
+      ]},
+      {path: 'resources', children: [
+        {path: '', component: ResourcesComponent, pathMatch: 'full'},
+        {path: 'add', component: ResourceFormComponent},
+        {path: 'edit', component: ResourceFormComponent},
+        {path: 'delete', component: ResourcesComponent}
+      ]},
+      {path: 'invoice', component: InvoiceComponent},
+      {path: 'status', children: [
+        {path: '', component: StatusComponent, pathMatch: 'full'},
+        {path: 'add', component: StatusFormComponent}
+      ]}
+    ]},
   ]}
 ];
 

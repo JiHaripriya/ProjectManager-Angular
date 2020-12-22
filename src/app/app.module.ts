@@ -13,6 +13,7 @@ import { ResourceFormComponent } from './shared/resource-form/resource-form.comp
 import { ProjectFormComponent } from './shared/project-form/project-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatusFormComponent } from './shared/status-form/status-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { StatusFormComponent } from './shared/status-form/status-form.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

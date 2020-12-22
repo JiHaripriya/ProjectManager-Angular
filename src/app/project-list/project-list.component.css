@@ -45,9 +45,13 @@ hr {
 .card-holder .row:hover {
     background-color:  #49d8a0;
     transition: all 0.2s ease;
+    color: #fff;
 }
 
-
+.card-holder .row:hover .circular {
+    color: #464648;
+    background: linear-gradient(to top, #d84981 40%, #fff 1%) !important;
+}
 
 .add-project-btn {
     margin-bottom: 10px;
@@ -74,4 +78,13 @@ hr {
     padding: 9px 6px;
     border-radius: 50%;
     background-color: #fff;
+}
+
+.select {
+    background-color: #d84981;
+    color: #fff;
+}
+
+.select .inner {
+    color: #464648;
 }

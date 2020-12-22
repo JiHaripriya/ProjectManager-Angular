@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormServiceService } from '../shared/services/form-service.service';
-
+import { ProjectApiService } from '../shared/services/project-api.service';
 
 @Component({
   selector: 'app-project-tabs',
@@ -10,10 +8,15 @@ import { FormServiceService } from '../shared/services/form-service.service';
 })
 export class ProjectTabsComponent implements OnInit {
 
-  constructor(private formService: FormServiceService, private router: Router) { }
+  projectIndex: string = '0';
+  constructor(private projectApi: ProjectApiService) { }
 
   ngOnInit(): void {
+    this.projectApi.selectedProjectIndex.subscribe(
+      index => {
+        this.projectIndex = String(index)
+        console.log(this.projectIndex)
+      }
+    )
   }
-
-
 }

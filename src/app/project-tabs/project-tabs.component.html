@@ -1,15 +1,15 @@
 <ul class="nav nav-pills mt-2 pb-1">
     <li class="nav-item bg-primary mr-2 rounded shadow-sm">
-      <a class="nav-link" routerLinkActive="active" routerLink="/details">Details</a>
+      <a class="nav-link" routerLinkActive="active" [routerLink]="'/projects/'+projectIndex+'/details'">Details</a>
     </li>
     <li class="nav-item bg-primary mr-2 rounded shadow-sm">
-      <a class="nav-link" routerLinkActive="active" routerLink="/resources">Resources</a>
+      <a class="nav-link" routerLinkActive="active" [routerLink]="'/projects/'+projectIndex+'/resources'">Resources</a>
     </li>
     <li class="nav-item bg-primary mr-2 rounded shadow-sm">
-      <a class="nav-link" routerLinkActive="active" routerLink="/invoice">Invoice</a>
+      <a class="nav-link" routerLinkActive="active" [routerLink]="'/projects/'+projectIndex+'/invoice'">Invoice</a>
     </li>
     <li class="nav-item bg-primary rounded mr-5 shadow-sm">
-      <a class="nav-link" routerLinkActive="active" routerLink="/status">Status</a>
+      <a class="nav-link" routerLinkActive="active" [routerLink]="'/projects/'+projectIndex+'/status'">Status</a>
     </li>
 </ul>
 

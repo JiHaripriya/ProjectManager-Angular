@@ -1,39 +1,39 @@
 <div class="row justify-content-between pr-4 pl-4 pb-2 pt-3">
-    <div class="left-side-details">
+    <div class="left-side-details" style="max-width: 60%;">
         <p class="heading">Project Name</p>
-        <p class="content">Justice League</p>
+        <p class="content">{{ selectedProjectDetails?.projectName }}</p>
       
         <p class="heading">Description</p>
-        <p class="content">Classified</p>
+        <p class="content">{{ selectedProjectDetails?.description }}</p>
       
         <p class="heading">Technologies Used</p>
         <p class="content">HTML, JavaScript, CSS</p>
     
         <p class="heading">Total Hours Spent</p>
-        <p class="content">18:30 hour(s)</p>
+        <p class="content">00:00 hour(s)</p>
     </div>
     
     <div class="right-side-details">        
         <div class="row pr-5">
           <div class="start-date-box mr-5">
             <p class="heading">Start Date</p>
-            <p class="content">2020-11-12</p>
+            <p class="content">{{ selectedProjectDetails?.startDate }}</p>
           </div>
           <div class="end-date-box">
             <p class="heading">End Date</p>
-            <p class="content">2020-11-29</p>
+            <p class="content">{{ selectedProjectDetails?.endDate }}</p>
           </div>        
         </div>
 
         <div class="row pt-3">
             <span class="circular shadow-sm d-flex align-items-center text-center">
-                <span class="m-auto shadow inner">40%</span>
+                <span class="m-auto shadow inner">{{ selectedProjectDetails?.range }}%</span>
             </span>
         </div>
-        
     </div>
 </div>
 
+<!-- Static Data
 <div class="row pr-4 pl-4 pb-2 pt-2">
     <div class="col">
         <span class="heading">Hours Spent Per Resource</span>
@@ -45,8 +45,7 @@
                     <th class="bg-success">Hours Spent</th>      
                 </tr>
             </thead>
-
-            <!-- Dynamically populate table body -->
+            -- Dynamically populate body --
             <tbody>
                 <tr>
                     <td>Haripriya</td>
@@ -71,4 +70,4 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> -->
