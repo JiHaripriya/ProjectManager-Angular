@@ -25,9 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
       status => {
         this.isForm = status;
     })
-
-    // Initially select first project
-    this.projectApi.selectedProjectIndex.next(0);    
   }
 
   ngOnDestroy() {

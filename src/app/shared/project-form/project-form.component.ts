@@ -45,15 +45,16 @@ export class ProjectFormComponent implements OnInit {
       'description': new FormControl(null, Validators.required) 
     })
 
-    if(String(this.router.url).toLocaleLowerCase().includes('edit')){
+    if(String(this.router.url).toLocaleLowerCase().includes('edit')) {
       this.buttonText = 'Update Project';
       this.showSlider = true;
 
       this.projectApi.fetchProjects().subscribe(
         data => {
+
           this.projectList = JSON.parse(JSON.stringify(data.reverse()));
           this.projectDetails = JSON.parse(JSON.stringify(data))[this.router.url.split('/')[2]];
-          console.log(this.projectDetails)
+
           this.projectForm.setValue({
             'projectName': this.projectDetails.projectName,
             'clientName': this.projectDetails.clientName,
@@ -96,7 +97,6 @@ export class ProjectFormComponent implements OnInit {
       }
     }
     else {
-
       // Overwrite already present data
       this.projectList[this.router.url.split('/')[2]] = Object.assign(this.projectForm.value);
       this.projectApi.updateProjectData(this.projectList.reverse());

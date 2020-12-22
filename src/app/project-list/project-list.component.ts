@@ -31,7 +31,7 @@ export class ProjectListComponent implements OnInit {
 
     // Reload component : Add new project
     this.projectApi.reloadComponent.subscribe(
-      response => response == 1 ? this.ngOnInit() : 0
+      response => response === 1 ? this.ngOnInit() : 0
     )
   }
 

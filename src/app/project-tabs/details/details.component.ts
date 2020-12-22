@@ -17,6 +17,7 @@ export class DetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+
     this.projectApi.fetchProjects().subscribe(
       data => {
         this.projects = JSON.parse(JSON.stringify(data.reverse()))
@@ -26,11 +27,6 @@ export class DetailsComponent implements OnInit {
     // Reload component : Add new project
     this.projectApi.reloadComponent.subscribe(
       response => response == 1 ? this.ngOnInit() : 0
-    )
-    this.projectApi.selectedProjectIndex.subscribe(
-      index => {
-        this.selectedProjectDetails = this.projects[Number(index)]
-      }
     )
   }
 }

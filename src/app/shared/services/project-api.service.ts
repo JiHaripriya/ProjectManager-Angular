@@ -17,8 +17,9 @@ export class ProjectApiService {
 
   storeProjectData(data:ProjectsModel) {
     this.http
-      .post<{name : string}>('https://project-management-syste-240c6-default-rtdb.firebaseio.com/projects.json', 
-      data).subscribe(responseData => {
+      .post('https://project-management-syste-240c6-default-rtdb.firebaseio.com/projects.json', 
+      data)
+      .subscribe(responseData => {
         this.reloadComponent.next(1);
         console.log(responseData)
       })
@@ -26,8 +27,9 @@ export class ProjectApiService {
 
   updateProjectData(data:ProjectsModel[]){
     this.http
-    .put<{name : string}>('https://project-management-syste-240c6-default-rtdb.firebaseio.com/projects.json', 
-    data).subscribe(responseData => {
+    .put('https://project-management-syste-240c6-default-rtdb.firebaseio.com/projects.json', 
+    data)
+    .subscribe(responseData => {
       this.reloadComponent.next(1);
       console.log(responseData)
     })
@@ -35,7 +37,7 @@ export class ProjectApiService {
 
   fetchProjects(){
     return this.http
-    .get<{ [key: string] : ProjectsModel} >('https://project-management-syste-240c6-default-rtdb.firebaseio.com/projects.json')
+    .get('https://project-management-syste-240c6-default-rtdb.firebaseio.com/projects.json')
     .pipe(
       map(responseData => {
         const projectsArray: ProjectsModel[] = []
