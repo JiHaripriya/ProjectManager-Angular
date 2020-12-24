@@ -12,6 +12,7 @@ export class DetailsComponent implements OnInit {
 
   public projects: ProjectsModel[] = [];
   selectedProjectDetails:ProjectsModel;
+  selectedId = 0;
 
   constructor(private projectApi: ProjectApiService,
     private router: Router) { }
@@ -27,6 +28,11 @@ export class DetailsComponent implements OnInit {
     // Reload component : Add new project
     this.projectApi.reloadComponent.subscribe(
       response => response == 1 ? this.ngOnInit() : 0
+    )
+
+    // Project switch
+    this.projectApi.selectedProjectIndex.subscribe(
+      index => this.selectedProjectDetails = this.projects[index]
     )
   }
 }

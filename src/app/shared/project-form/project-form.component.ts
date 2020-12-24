@@ -98,12 +98,15 @@ export class ProjectFormComponent implements OnInit {
     }
     else {
       // Overwrite already present data
+      
       this.projectList[this.router.url.split('/')[2]] = Object.assign(this.projectForm.value);
       this.projectApi.updateProjectData(this.projectList.reverse());
     }
 
     this.projectForm.reset();
     this.formService.isFormStatus.next(0);
+    // Show details of newly added project
+    this.projectApi.selectedProjectIndex.next(0);
     this.router.navigate([`/projects/0/details`]);
    
   }

@@ -1,4 +1,4 @@
-<div class="row justify-content-between pr-4 pl-4 pb-2 pt-3">
+<div class="row justify-content-between pr-4 pl-4 pb-2 pt-3" *ngIf="projects.length > 0">
     <div class="left-side-details" style="max-width: 60%;">
         <p class="heading">Project Name</p>
         <p class="content">{{ selectedProjectDetails?.projectName }}</p>
@@ -32,6 +32,15 @@
         </div>
     </div>
 </div>
+
+<!-- No data available -->
+<div class="row pr-4 pl-4 pb-2 pt-3 moving-card" *ngIf="projects.length === 0">
+    <div class="col-md-12">
+        <img src="../../../assets/images/error-img.png" alt="" class="ml-5 img-responsive">
+        <p class="ml-3 mt-3">No data available. Add projects to get started!</p>
+    </div>
+</div>
+
 
 <!-- Static Data
 <div class="row pr-4 pl-4 pb-2 pt-2">
