@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormServiceService } from './shared/services/form-service.service';
 import { ProjectApiService } from './shared/services/project-api.service';
+import { ProjectsModel } from './shared/services/projects-model.model';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ export class AppComponent implements OnInit, OnDestroy {
   isForm: number;
   isProjectDetails = false;
   subscription: Subscription;
+  projects: ProjectsModel[];
+  
   constructor(
     private formService: FormServiceService, 
     private router: Router,
@@ -25,6 +28,16 @@ export class AppComponent implements OnInit, OnDestroy {
       status => {
         this.isForm = status;
     })
+
+    this.projectApi.fetchProjects().subscribe(
+      data => {
+        this.projects = JSON.parse(JSON.stringify(data.reverse()))
+    });
+
+    // Reload component : Add new project
+    this.projectApi.reloadComponent.subscribe(
+      response => response == 1 ? this.ngOnInit() : 0
+    )
   }
 
   ngOnDestroy() {

@@ -13,16 +13,20 @@ export class DetailsComponent implements OnInit {
   public projects: ProjectsModel[] = [];
   selectedProjectDetails:ProjectsModel;
   selectedId = 0;
+  loading: boolean;
 
   constructor(private projectApi: ProjectApiService,
     private router: Router) { }
 
   ngOnInit(): void {
 
+    this.loading = true;
+
     this.projectApi.fetchProjects().subscribe(
       data => {
         this.projects = JSON.parse(JSON.stringify(data.reverse()))
         this.selectedProjectDetails = this.projects[this.router.url.split('/')[2]] // Initial setup
+        this.loading = false;
     });
 
     // Reload component : Add new project
@@ -32,7 +36,10 @@ export class DetailsComponent implements OnInit {
 
     // Project switch
     this.projectApi.selectedProjectIndex.subscribe(
-      index => this.selectedProjectDetails = this.projects[index]
+      index => {
+        this.selectedProjectDetails = this.projects[index];
+        this.loading = false;
+      }
     )
   }
 }

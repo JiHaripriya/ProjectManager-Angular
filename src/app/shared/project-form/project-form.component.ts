@@ -45,15 +45,19 @@ export class ProjectFormComponent implements OnInit {
       'description': new FormControl(null, Validators.required) 
     })
 
+    this.projectApi.fetchProjects().subscribe(
+      data => {
+        this.projectList = JSON.parse(JSON.stringify(data.reverse()));
+        this.projectDetails = JSON.parse(JSON.stringify(data))[this.router.url.split('/')[2]];
+    });
+
     if(String(this.router.url).toLocaleLowerCase().includes('edit')) {
       this.buttonText = 'Update Project';
       this.showSlider = true;
 
       this.projectApi.fetchProjects().subscribe(
         data => {
-
-          this.projectList = JSON.parse(JSON.stringify(data.reverse()));
-          this.projectDetails = JSON.parse(JSON.stringify(data))[this.router.url.split('/')[2]];
+          this.projectDetails = JSON.parse(JSON.stringify(data.reverse()))[this.router.url.split('/')[2]];
 
           this.projectForm.setValue({
             'projectName': this.projectDetails.projectName,
@@ -92,19 +96,21 @@ export class ProjectFormComponent implements OnInit {
   
       // Submit actual form
       if((this.projectForm.valid) && (!this.endDateError) && (!this.startDateError)) {
-        // Send http 
-        this.projectApi.storeProjectData(this.projectForm.value);
+        // Send http
+        const projectData = Object.assign({}, this.projectForm.value, {'projectID': this.projectList.length});
+        console.log(projectData); 
+        this.projectApi.storeProjectData(projectData);
       }
     }
     else {
       // Overwrite already present data
-      
-      this.projectList[this.router.url.split('/')[2]] = Object.assign(this.projectForm.value);
+      this.projectList[this.router.url.split('/')[2]] = Object.assign(this.projectList[this.router.url.split('/')[2]], this.projectForm.value);
       this.projectApi.updateProjectData(this.projectList.reverse());
     }
 
     this.projectForm.reset();
     this.formService.isFormStatus.next(0);
+    
     // Show details of newly added project
     this.projectApi.selectedProjectIndex.next(0);
     this.router.navigate([`/projects/0/details`]);
