@@ -100,21 +100,21 @@ export class ProjectFormComponent implements OnInit {
         const projectData = Object.assign({}, this.projectForm.value, {'projectID': this.projectList.length});
         console.log(projectData); 
         this.projectApi.storeProjectData(projectData);
+
+        // Show details of newly added project
+        this.projectApi.selectedCardIndex.next(0);
+        this.router.navigate([`/projects/0/details`]);
       }
     }
     else {
       // Overwrite already present data
       this.projectList[this.router.url.split('/')[2]] = Object.assign(this.projectList[this.router.url.split('/')[2]], this.projectForm.value);
       this.projectApi.updateProjectData(this.projectList.reverse());
+      this.router.navigate([`/projects/${this.router.url.split('/')[2]}/details`]);
     }
 
     this.projectForm.reset();
     this.formService.isFormStatus.next(0);
-    
-    // Show details of newly added project
-    this.projectApi.selectedProjectIndex.next(0);
-    this.router.navigate([`/projects/0/details`]);
-   
   }
 
   cancelProject(){

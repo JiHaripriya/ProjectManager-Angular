@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { FormServiceService } from '../shared/services/form-service.service';
 import { PathRoutingService } from '../shared/services/path-routing.service';
 import { ProjectApiService } from '../shared/services/project-api.service';
@@ -10,10 +11,13 @@ import { ProjectsModel } from '../shared/services/projects-model.model';
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css']
 })
-export class ProjectListComponent implements OnInit {
+export class ProjectListComponent implements OnInit, OnDestroy {
 
   public projects: ProjectsModel[] = [];
   selectedId = 0;
+
+  projectsSubscription : Subscription;
+  reloadComponentSubjectSubscription : Subscription;
 
   constructor(private router: Router, 
     private formService: FormServiceService, 
@@ -24,7 +28,7 @@ export class ProjectListComponent implements OnInit {
     this.projectApi.fetchProjects().subscribe(
       data => {
         this.projects = data.reverse()
-        this.projectApi.selectedProjectIndex.subscribe(
+        this.projectApi.selectedCardIndex.subscribe(
           index => this.selectedId = index
       )
     });
@@ -41,9 +45,15 @@ export class ProjectListComponent implements OnInit {
     this.router.navigateByUrl('/projects/add');
   }
 
-  getProjectIndex(index: number) {
-    this.projectApi.selectedProjectIndex.next(index);
+  getProjectIndex(projectId: number, index: number) {
+    this.projectApi.selectedCardIndex.next(index); // for routing 
+    this.projectApi.selectedProjectId.next(projectId); // for project details fetch
     this.router.navigateByUrl(`projects/${index}/details`);
+  }
+
+  ngOnDestroy() {
+    this.projectsSubscription.unsubscribe();
+    this.reloadComponentSubjectSubscription.unsubscribe();
   }
 
 }
