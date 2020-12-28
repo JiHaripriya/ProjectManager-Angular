@@ -15,7 +15,6 @@ export class ProjectTabsComponent implements OnInit {
     this.projectApi.selectedProjectId.subscribe(
       index => {
         this.projectIndex = String(index)
-        console.log(this.projectIndex)
       }
     )
   }

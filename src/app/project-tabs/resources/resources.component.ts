@@ -13,14 +13,15 @@ export class ResourcesComponent implements OnInit, OnDestroy {
 
   isDelete = false;
   projectIndexSubjectSubscription : Subscription;
+  // projectId: number // get project id of selected project
   
   constructor(private router: Router, private formService: FormServiceService, private projectApi: ProjectApiService) { }
 
   ngOnInit(): void {
     // Get project id
-    this.projectIndexSubjectSubscription = this.projectApi.selectedProjectId.subscribe(
-      index => console.log('Inside resources tab: ' + index)
-    )
+    // this.projectIndexSubjectSubscription = this.projectApi.selectedProjectId.subscribe(
+    //   index => 
+    // )
   }
 
   loadResourceForm() {
