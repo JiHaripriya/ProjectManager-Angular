@@ -10,7 +10,7 @@ import { StatusFormComponent } from './shared/status-form/status-form.component'
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/projects/0/details', pathMatch: 'full'},
+  {path: '', redirectTo: '/projects/0/details', pathMatch: 'full'}, // fix
   {path: 'projects', children :[
     {path: 'add', component: ProjectFormComponent}, 
     {path: ':id', children: [

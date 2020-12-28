@@ -47,8 +47,8 @@ export class ProjectFormComponent implements OnInit {
 
     this.projectApi.fetchProjects().subscribe(
       data => {
-        this.projectList = JSON.parse(JSON.stringify(data.reverse()));
-        this.projectDetails = JSON.parse(JSON.stringify(data))[this.router.url.split('/')[2]];
+        this.projectList = JSON.parse(JSON.stringify(data));
+        this.projectDetails = JSON.parse(JSON.stringify(data.reverse()))[this.router.url.split('/')[2]]; // router id is considered to fetch details
     });
 
     if(String(this.router.url).toLocaleLowerCase().includes('edit')) {
@@ -57,7 +57,7 @@ export class ProjectFormComponent implements OnInit {
 
       this.projectApi.fetchProjects().subscribe(
         data => {
-          this.projectDetails = JSON.parse(JSON.stringify(data.reverse()))[this.router.url.split('/')[2]];
+          this.projectDetails = JSON.parse(JSON.stringify(data))[this.router.url.split('/')[2]];
 
           this.projectForm.setValue({
             'projectName': this.projectDetails.projectName,
@@ -102,14 +102,16 @@ export class ProjectFormComponent implements OnInit {
         this.projectApi.storeProjectData(projectData);
 
         // Show details of newly added project
-        this.projectApi.selectedCardIndex.next(0);
-        this.router.navigate([`/projects/0/details`]);
+        this.projectApi.selectedProjectId.next(this.projectList.length);
+        this.router.navigate([`/projects/${this.projectList.length}/details`]);
       }
     }
     else {
       // Overwrite already present data
+      console.log(this.projectList[this.router.url.split('/')[2]])
       this.projectList[this.router.url.split('/')[2]] = Object.assign(this.projectList[this.router.url.split('/')[2]], this.projectForm.value);
-      this.projectApi.updateProjectData(this.projectList.reverse());
+      console.log(this.projectList)
+      this.projectApi.updateProjectData(this.projectList);
       this.router.navigate([`/projects/${this.router.url.split('/')[2]}/details`]);
     }
 

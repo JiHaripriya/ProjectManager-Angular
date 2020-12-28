@@ -12,7 +12,7 @@ export class ProjectTabsComponent implements OnInit {
   constructor(private projectApi: ProjectApiService) { }
 
   ngOnInit(): void {
-    this.projectApi.selectedCardIndex.subscribe(
+    this.projectApi.selectedProjectId.subscribe(
       index => {
         this.projectIndex = String(index)
         console.log(this.projectIndex)

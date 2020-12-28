@@ -19,9 +19,9 @@
 
     <div class="row justify-content-between mb-3 p-3" 
     *ngFor="let project of projects; let i = index" 
-    [ngClass]="{'select': selectedId == i}" 
-    [id]="i"
-    (click)="getProjectIndex(project.projectID, i)"
+    [ngClass]="{'select': selectedId == project.projectID}" 
+    [id]="project.projectID"
+    (click)="getProjectIndex(project.projectID)"
     >
         <span>{{project.projectName}}</span>
         <span class="circular shadow-sm d-flex align-items-center text-center">

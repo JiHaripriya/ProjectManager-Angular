@@ -16,7 +16,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
   selectedId = 0;
   loading: boolean;
   
-  cardSubjectSubscription : Subscription;
   projectIndexSubjectSubscription : Subscription;
   reloadComponentSubjectSubscription : Subscription;
   projectsSubscription : Subscription;
@@ -30,7 +29,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
     this.projectsSubscription = this.projectApi.fetchProjects().subscribe(
       data => {
-        this.projects = JSON.parse(JSON.stringify(data.reverse()))
+        this.projects = JSON.parse(JSON.stringify(data))
         this.selectedProjectDetails = this.projects[this.router.url.split('/')[2]] // Initial setup
         this.loading = false;
     });
@@ -40,23 +39,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
       response => response == 1 ? this.ngOnInit() : 0
     )
 
-    // Project switch
-    this.cardSubjectSubscription = this.projectApi.selectedCardIndex.subscribe(
-      index => {
+    // Get project id and tab switching
+    this.projectIndexSubjectSubscription = this.projectApi.selectedProjectId.subscribe(
+    index => {
         this.selectedProjectDetails = this.projects[index];
         this.loading = false;
     })
-
-    // Get project id
-    this.projectIndexSubjectSubscription = this.projectApi.selectedProjectId.subscribe(
-      index => console.log('Inside Details tab: ' + index)
-    )
   }
 
   ngOnDestroy() {
     this.projectsSubscription.unsubscribe();
     this.projectIndexSubjectSubscription.unsubscribe();
-    this.cardSubjectSubscription.unsubscribe();
     this.reloadComponentSubjectSubscription.unsubscribe();
   }
 }

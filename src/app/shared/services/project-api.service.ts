@@ -11,7 +11,6 @@ import { ProjectsModel } from './projects-model.model';
 export class ProjectApiService {
 
   reloadComponent = new Subject<number>();
-  selectedCardIndex = new Subject<number>();
   selectedProjectId = new Subject<number>();
 
   constructor(private http: HttpClient) { }

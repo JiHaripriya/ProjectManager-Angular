@@ -28,7 +28,8 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.projectApi.fetchProjects().subscribe(
       data => {
         this.projects = data.reverse()
-        this.projectApi.selectedCardIndex.subscribe(
+        // Highlight selected
+        this.projectApi.selectedProjectId.subscribe(
           index => this.selectedId = index
       )
     });
@@ -45,10 +46,9 @@ export class ProjectListComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/projects/add');
   }
 
-  getProjectIndex(projectId: number, index: number) {
-    this.projectApi.selectedCardIndex.next(index); // for routing 
+  getProjectIndex(projectId: number) {
     this.projectApi.selectedProjectId.next(projectId); // for project details fetch
-    this.router.navigateByUrl(`projects/${index}/details`);
+    this.router.navigateByUrl(`projects/${projectId}/details`);
   }
 
   ngOnDestroy() {
