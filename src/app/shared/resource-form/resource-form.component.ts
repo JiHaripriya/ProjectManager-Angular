@@ -17,17 +17,24 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
   checkboxFlag: boolean;
   showRate  = false;
   resourceList: ResourcesModel[];
+  selectedProjectResourceList: ResourcesModel[];
   resourceSubcription: Subscription;
   resourceDetails: ResourcesModel;
   selectedResource: number;
 
   constructor(private router:Router, private formService:FormServiceService, private projectApi: ProjectApiService) {
-    this.selectedResource = JSON.parse(this.router.url.split('/')[5]);
+    if(String(this.router.url).toLocaleLowerCase().includes('edit')) this.selectedResource = JSON.parse(this.router.url.split('/')[5]);
   }
 
   resourceForm : FormGroup;
 
   ngOnInit(): void {
+
+    this.resourceSubcription = this.projectApi.fetchResources().subscribe(
+      data => {
+        this.resourceList = JSON.parse(JSON.stringify(data))
+        this.selectedProjectResourceList = this.resourceList.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]));
+    });
 
     // Form button text 
     if(String(this.router.url).toLocaleLowerCase().includes('edit')) {
@@ -35,9 +42,12 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
 
       this.resourceSubcription = this.projectApi.fetchResources().subscribe(
         data => {
-          this.resourceList = JSON.parse(JSON.stringify(data)).filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]));
+
+          this.resourceList = JSON.parse(JSON.stringify(data))
+          this.selectedProjectResourceList = this.resourceList.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]));
+          console.log(this.selectedProjectResourceList)
           
-          this.resourceDetails = this.resourceList.filter(resource => resource.resourceId == this.selectedResource)[0]
+          this.resourceDetails = this.selectedProjectResourceList.filter(resource => resource.resourceId == this.selectedResource)[0]
 
           this.resourceForm.setValue({
             'resourceName': this.resourceDetails.resourceName,
@@ -71,7 +81,8 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
   onSubmit(){
     // console.log(this.resourceForm.value);
     if(String(this.router.url).toLocaleLowerCase().includes('edit')) {
-      const resourceIndex = this.resourceList.map((val, index) => val.resourceId === this.selectedResource ? index : -1).filter(val => val != -1)[0];
+      // add projectid  id and resource id check
+      const resourceIndex = this.resourceList.map((val, index) => val.resourceId === this.selectedResource && val.projectId === Number(this.router.url.split('/')[1])? index : -1).filter(val => val != -1)[0];
       this.resourceList[resourceIndex] = Object.assign(this.resourceDetails, this.resourceForm.value);
       this.projectApi.updateResourceData(this.resourceList);
     }
@@ -79,7 +90,7 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
       // New resource
       // If billable is not checked, the value is undefined --> set value to false 
       this.resourceForm.value.checkboxFlag = this.resourceForm.value.checkboxFlag === undefined ? false : true;
-      const resourceData = Object.assign({}, this.resourceForm.value, { 'resourceId': this.resourceList.length }, { 'projectId': JSON.parse(this.router.url.split('/')[2]) });
+      const resourceData = Object.assign({}, this.resourceForm.value, { 'resourceId': this.selectedProjectResourceList.length }, { 'projectId': JSON.parse(this.router.url.split('/')[2]) });
       this.projectApi.storeResourceData(resourceData);
       this.projectApi.reloadComponent.next(1);
     }
