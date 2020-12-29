@@ -1,40 +1,32 @@
 <div class="d-flex justify-content-center">
-    <form class="mt-4">
+    <form class="mt-4" (ngSubmit)="onSubmit()" [formGroup]="invoiceForm">
         <label for="invoice" class="mr-2">Number of working days:</label>
-        <input type="text" name="invoice" id="" class="mr-3">
-        <button type="submit" class="btn btn-primary">Generate Invoice</button>
+        <input type="text" name="invoice" id="" class="mr-3" formControlName="numDays">
+        <button type="submit" class="btn btn-primary" [disabled]="!invoiceForm.valid">Generate Invoice</button>
     </form>
 </div>
 
-<table class="mt-4 table">
+<table class="mt-4 table" *ngIf="generate">
     <thead>
         <tr>
             <th class="bg-success">Name</th>
-            <th class="bg-success">Rate Per Hour</th> 
+            <th class="bg-success">Email</th>
+            <th class="bg-success">Rate Per Hour</th>        
             <th class="bg-success">Total Amount</th>         
         </tr>
     </thead>
 
     <!-- Dynamically populate table body -->
     <tbody>
-        <tr>
-            <td>Name</td>
-            <td>100</td>
-            <td>500</td>    
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>100</td>
-            <td>500</td>  
-        </tr>
-        <tr>
-            <td>Name</td>
-            <td>100</td>
-            <td>500</td>  
+        <tr *ngFor="let resource of billables; let i = index">
+            <td>{{resource.resourceName}}</td>
+            <td>{{resource.resourceEmail}}</td>
+            <td>{{resource.billableAmount}}</td>
+            <td>{{totalAmounts[i]}}</td>    
         </tr>
     </tbody>
 </table>
 
 <div class="float-right mr-5 font-weight-bold">
-    Total:
+    Total: {{billAmount}}
 </div>
