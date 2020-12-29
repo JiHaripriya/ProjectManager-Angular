@@ -102,13 +102,13 @@ export class ProjectApiService {
       .get('https://project-management-syste-240c6-default-rtdb.firebaseio.com/status.json')
       .pipe(
         map(responseData => {
-          const resourcesArray: StatusModel[] = []
+          const statusArray: StatusModel[] = []
           for (const key in responseData) {
             if (responseData.hasOwnProperty(key)) {
-              resourcesArray.push({ ...responseData[key] })
+              statusArray.push({ ...responseData[key] })
             }
           }
-          return resourcesArray;
+          return statusArray;
         })
       )
   }

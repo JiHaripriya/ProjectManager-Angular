@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { ResourcesModel } from '../services/resources-model.model';
   templateUrl: './status-form.component.html',
   styleUrls: ['./status-form.component.css'],
 })
-export class StatusFormComponent implements OnInit {
+export class StatusFormComponent implements OnInit, OnDestroy {
   statusForm: FormGroup;
   activityTypeList = [
     'Project management',
@@ -76,12 +76,12 @@ export class StatusFormComponent implements OnInit {
     const statusUpdate = Object.assign(rest, 
       {'resourceName': resourceDetails.split(',')[0], 
       'resourceEmail': resourceDetails.split(',')[1],
-      'date': `${new Date().toLocaleDateString()}`,
       'postedOn': `${new Date().toLocaleDateString()} ${new Date().toTimeString().split(' ')[0]}`,
       'projectId': Number(this.router.url.split('/')[2]),
       'resourceId': this.selectedProjectResources.filter(val => val.resourceEmail === resourceDetails.split(',')[1])[0].resourceId
     })
     this.projectApi.storeStatus(statusUpdate);
+    this.projectApi.reloadComponent.next(1);
     this.formService.isFormStatus.next(0);
     this.router.navigate(['../'], {relativeTo: this.route});
   }
@@ -105,5 +105,9 @@ export class StatusFormComponent implements OnInit {
     let date = new Date(dateInput.valueOf())
     date.setDate(date.getDate() - days)
     return date
+  }
+
+  ngOnDestroy() {
+    this.projectsSubscription.unsubscribe();
   }
 }
