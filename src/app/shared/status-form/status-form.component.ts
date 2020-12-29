@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { FormServiceService } from '../services/form-service.service';
+import { ProjectApiService } from '../services/project-api.service';
+import { ResourcesModel } from '../services/resources-model.model';
 
 @Component({
   selector: 'app-status-form',
@@ -33,17 +36,32 @@ export class StatusFormComponent implements OnInit {
   minuteSequence = Array.from({ length: 4 }, (_, index) => String((index) * 15).length == 1 ? `0${(index) * 15}` : `${(index) * 15}`);
   dateArray: Array<string>[];
   
+  projectsSubscription: Subscription;
+
+  resources : ResourcesModel[];
+  selectedProjectResources : ResourcesModel[];
+  resourcesOption = [];
 
   constructor(
     private formService: FormServiceService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private projectApi: ProjectApiService
   ) {
     // Get dates array in increasing order
     this.dateArray = this.generateDates(new Date(), this.subtractDays( new Date(), 7 )).reverse();
   }
 
   ngOnInit(): void {
+
+    this.projectsSubscription = this.projectApi.fetchResources().subscribe(
+      async data => {
+        this.resources = await JSON.parse(JSON.stringify(data))
+        this.selectedProjectResources = await this.resources.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]))
+        this.selectedProjectResources.map(resource => this.resourcesOption.push(`${resource.resourceName} <${resource.resourceEmail}>`));
+        console.log(this.resourcesOption);
+    });
+
     this.statusForm = new FormGroup({
       resource: new FormControl(null, Validators.required),
       date: new FormControl(`${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()}`),
@@ -51,10 +69,11 @@ export class StatusFormComponent implements OnInit {
       hours: new FormControl('08'),
       minutes: new FormControl('00'),
     });
+    
   }
 
   onSubmit() {
-    console.log(this.statusForm);
+    console.log(this.statusForm.value);
   }
 
   cancelStatusUpdate() {

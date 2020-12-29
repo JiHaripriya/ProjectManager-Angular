@@ -36,6 +36,16 @@ export class ProjectApiService {
       })
   }
 
+  // storeStatus(){
+  //   this.http
+  //     .post('https://project-management-syste-240c6-default-rtdb.firebaseio.com/status.json',
+  //       data)
+  //     .subscribe(responseData => {
+  //       this.reloadComponent.next(1);
+  //       console.log(responseData)
+  //     })
+  // }
+
   updateProjectData(data:ProjectsModel[]){
     this.http
     .put('https://project-management-syste-240c6-default-rtdb.firebaseio.com/projects.json', 

@@ -20,7 +20,7 @@
     <div class="row form-group">
       <label for="resource">Resource</label>
       <select formControlName="resource" id="resource" class="form-control">
-        <option value="Name">Name</option>
+        <option *ngFor="let option of resourcesOption" [value]="option">{{ option }}</option>
       </select>
       <span
         *ngIf="
