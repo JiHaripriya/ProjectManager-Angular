@@ -42,7 +42,6 @@ export class ProjectApiService {
     data)
     .subscribe(responseData => {
       this.reloadComponent.next(1);
-      console.log(responseData)
     })
   }
 
@@ -52,7 +51,6 @@ export class ProjectApiService {
         data)
       .subscribe(responseData => {
         this.reloadComponent.next(1);
-        console.log(responseData)
       })
   }
 

@@ -23,7 +23,7 @@
         <td>{{ resource.role }}</td>
         <td>{{ resource.checkboxFlag }}</td>
         <td>{{ resource.billableAmount }}</td>
-        <td (click)="editResource()" style="cursor: pointer" class="icons">
+        <td (click)="editResource(resource.resourceId)" style="cursor: pointer" class="icons">
           <img
             src="../assets/images/edit-icon.PNG"
             alt=""
@@ -31,7 +31,7 @@
             class="img-responsive edit-icon"
           />
         </td>
-        <td (click)="deleteResource()" style="cursor: pointer" class="icons">
+        <td (click)="deleteResource(resource.resourceId)" style="cursor: pointer" class="icons">
           <img
             src="../assets/images/delete-icon.PNG"
             alt=""

@@ -13,10 +13,14 @@ import { ResourcesModel } from 'src/app/shared/services/resources-model.model';
 export class ResourcesComponent implements OnInit, OnDestroy {
 
   isDelete = false;
-  resources:ResourcesModel[];
-  resourceLength = 0;
-  selectedProjectResources:ResourcesModel[];
   loading: boolean;
+
+  resourceLength = 0;
+
+  selectedProjectResources:ResourcesModel[];
+  resources:ResourcesModel[];
+  updatedResources: ResourcesModel[];
+
   projectsSubscription : Subscription;
   reloadSubscription: Subscription;
   
@@ -25,16 +29,17 @@ export class ResourcesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.loading = true;
+
     this.projectsSubscription = this.projectApi.fetchResources().subscribe(
       data => {
         this.resources = JSON.parse(JSON.stringify(data))
-        this.resourceLength = this.resources.length;
+        
         this.selectedProjectResources = this.resources.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]))
-        console.log(this.selectedProjectResources)
+        this.resourceLength = this.selectedProjectResources.length;
+
+        this.reloadSubscription = this.projectApi.reloadComponent.subscribe(response => response == 1 ? this.ngOnInit() : 0)
+
         this.loading = false;
-        this.reloadSubscription = this.projectApi.reloadComponent.subscribe(
-          response => response == 1 ? this.ngOnInit() : 0
-        )
     });
   }
 
@@ -44,15 +49,16 @@ export class ResourcesComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`${this.router.url}/add`);
   }
 
-  editResource(){
+  editResource(resourceId: number){
     this.isDelete = false;
     this.formService.isFormStatus.next(1);
     this.router.navigateByUrl('/resources/edit');
   }
 
-  deleteResource() {
-    this.isDelete = true;
-    this.formService.isFormStatus.next(1);
+  deleteResource(resourceId: number) {
+    this.updatedResources = this.resources.filter((resource) => resource.resourceId !== resourceId)
+    this.projectApi.updateResourceData(this.updatedResources)
+    this.router.navigateByUrl(`${this.router.url}`);
   }
 
   cancelDeleteResource(){
