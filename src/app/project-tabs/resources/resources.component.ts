@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormServiceService } from 'src/app/shared/services/form-service.service';
 import { ProjectApiService } from 'src/app/shared/services/project-api.service';
+import { ResourcesModel } from 'src/app/shared/services/resources-model.model';
 
 @Component({
   selector: 'app-resources',
@@ -12,32 +13,52 @@ import { ProjectApiService } from 'src/app/shared/services/project-api.service';
 export class ResourcesComponent implements OnInit, OnDestroy {
 
   isDelete = false;
-  projectIndexSubjectSubscription : Subscription;
+  loading: boolean;
+
+  resourceLength = 0;
+
+  selectedProjectResources:ResourcesModel[];
+  resources:ResourcesModel[];
+  updatedResources: ResourcesModel[];
+
+  projectsSubscription : Subscription;
+  reloadSubscription: Subscription;
   
   constructor(private router: Router, private formService: FormServiceService, private projectApi: ProjectApiService) { }
 
   ngOnInit(): void {
-    // Get project id
-    this.projectIndexSubjectSubscription = this.projectApi.selectedProjectId.subscribe(
-      index => console.log('Inside resources tab: ' + index)
-    )
+
+    this.loading = true;
+
+    this.projectsSubscription = this.projectApi.fetchResources().subscribe(
+      data => {
+        this.resources = JSON.parse(JSON.stringify(data))
+        
+        this.selectedProjectResources = this.resources.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]))
+        this.resourceLength = this.selectedProjectResources.length;
+
+        this.reloadSubscription = this.projectApi.reloadComponent.subscribe(response => response == 1 ? this.ngOnInit() : 0)
+
+        this.loading = false;
+    });
   }
 
   loadResourceForm() {
     this.isDelete = false;
     this.formService.isFormStatus.next(1);
-    this.router.navigateByUrl('/resources/add');
+    this.router.navigateByUrl(`${this.router.url}/add`);
   }
 
-  editResource(){
+  editResource(resourceId: number){
     this.isDelete = false;
     this.formService.isFormStatus.next(1);
-    this.router.navigateByUrl('/resources/edit');
+    this.router.navigate([`${this.router.url}` + '/edit/' + `${resourceId}`]);
   }
 
-  deleteResource() {
-    this.isDelete = true;
-    this.formService.isFormStatus.next(1);
+  deleteResource(resourceId: number) {
+    this.updatedResources = this.resources.filter((resource) => resource.resourceId !== resourceId)
+    this.projectApi.updateResourceData(this.updatedResources)
+    this.router.navigateByUrl(`${this.router.url}`);
   }
 
   cancelDeleteResource(){
@@ -47,6 +68,7 @@ export class ResourcesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.projectIndexSubjectSubscription.unsubscribe();
+    this.projectsSubscription.unsubscribe();
+    this.reloadSubscription.unsubscribe();
   }
 }

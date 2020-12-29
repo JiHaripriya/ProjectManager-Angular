@@ -98,7 +98,6 @@ export class ProjectFormComponent implements OnInit {
       if((this.projectForm.valid) && (!this.endDateError) && (!this.startDateError)) {
         // Send http
         const projectData = Object.assign({}, this.projectForm.value, {'projectID': this.projectList.length});
-        console.log(projectData); 
         this.projectApi.storeProjectData(projectData);
 
         // Show details of newly added project
@@ -108,9 +107,7 @@ export class ProjectFormComponent implements OnInit {
     }
     else {
       // Overwrite already present data
-      console.log(this.projectList[this.router.url.split('/')[2]])
       this.projectList[this.router.url.split('/')[2]] = Object.assign(this.projectList[this.router.url.split('/')[2]], this.projectForm.value);
-      console.log(this.projectList)
       this.projectApi.updateProjectData(this.projectList);
       this.router.navigate([`/projects/${this.router.url.split('/')[2]}/details`]);
     }
