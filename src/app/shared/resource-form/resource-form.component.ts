@@ -45,7 +45,6 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
 
           this.resourceList = JSON.parse(JSON.stringify(data))
           this.selectedProjectResourceList = this.resourceList.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]));
-          console.log(this.selectedProjectResourceList)
           
           this.resourceDetails = this.selectedProjectResourceList.filter(resource => resource.resourceId == this.selectedResource)[0]
 
@@ -79,7 +78,7 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
-    // console.log(this.resourceForm.value);
+    
     if(String(this.router.url).toLocaleLowerCase().includes('edit')) {
       // add projectid  id and resource id check
       const resourceIndex = this.resourceList.map((val, index) => val.resourceId === this.selectedResource && val.projectId === Number(this.router.url.split('/')[1])? index : -1).filter(val => val != -1)[0];

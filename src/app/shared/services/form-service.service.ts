@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 export class FormServiceService {
 
   isFormStatus = new Subject<number>();
-  selectedResource = new Subject<number>();
   
   constructor() { }
 }
