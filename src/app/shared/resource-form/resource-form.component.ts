@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormServiceService } from '../services/form-service.service';
 import { ProjectApiService } from '../services/project-api.service';
@@ -22,7 +22,11 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
   resourceDetails: ResourcesModel;
   selectedResource: number;
 
-  constructor(private router:Router, private formService:FormServiceService, private projectApi: ProjectApiService) {
+  constructor(
+    private router:Router, 
+    private formService:FormServiceService, 
+    private projectApi: ProjectApiService,
+    private route: ActivatedRoute) {
     if(String(this.router.url).toLocaleLowerCase().includes('edit')) this.selectedResource = JSON.parse(this.router.url.split('/')[5]);
   }
 
@@ -74,7 +78,7 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
 
   cancelResource(){
     this.formService.isFormStatus.next(0);
-    this.router.navigateByUrl(this.router.url.split('/').slice(0, 4).join('/'));
+    String(this.router.url).toLocaleLowerCase().includes('edit')? this.router.navigate(['../../'], {relativeTo: this.route}): this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   onSubmit(){

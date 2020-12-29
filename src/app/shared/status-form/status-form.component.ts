@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormServiceService } from '../services/form-service.service';
 
 @Component({
@@ -36,7 +36,8 @@ export class StatusFormComponent implements OnInit {
 
   constructor(
     private formService: FormServiceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     // Get dates array in increasing order
     this.dateArray = this.generateDates(new Date(), this.subtractDays( new Date(), 7 )).reverse();
@@ -58,6 +59,7 @@ export class StatusFormComponent implements OnInit {
 
   cancelStatusUpdate() {
     this.formService.isFormStatus.next(0);
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   // Generates dates between a given start and end date (both inclusive) and returns an array of dates

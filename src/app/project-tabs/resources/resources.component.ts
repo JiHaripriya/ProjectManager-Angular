@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormServiceService } from 'src/app/shared/services/form-service.service';
 import { ProjectApiService } from 'src/app/shared/services/project-api.service';
@@ -59,12 +59,6 @@ export class ResourcesComponent implements OnInit, OnDestroy {
     this.updatedResources = this.resources.filter((resource) => resource.resourceId !== resourceId)
     this.projectApi.updateResourceData(this.updatedResources)
     this.router.navigateByUrl(`${this.router.url}`);
-  }
-
-  cancelDeleteResource(){
-    this.isDelete = false;
-    this.formService.isFormStatus.next(0);
-    this.router.navigateByUrl('/resources');
   }
 
   ngOnDestroy() {

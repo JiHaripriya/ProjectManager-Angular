@@ -16,7 +16,7 @@ export class StatusComponent implements OnInit {
 
   loadStatusForm() {
     this.formService.isFormStatus.next(1);
-    this.router.navigateByUrl('/status/add');
+    this.router.navigateByUrl(`${this.router.url}/add`);
   }
 
 }
