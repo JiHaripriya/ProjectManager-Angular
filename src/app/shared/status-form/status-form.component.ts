@@ -55,11 +55,10 @@ export class StatusFormComponent implements OnInit {
   ngOnInit(): void {
 
     this.projectsSubscription = this.projectApi.fetchResources().subscribe(
-      async data => {
-        this.resources = await JSON.parse(JSON.stringify(data))
-        this.selectedProjectResources = await this.resources.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]))
-        this.selectedProjectResources.map(resource => this.resourcesOption.push(`${resource.resourceName} <${resource.resourceEmail}>`));
-        console.log(this.resourcesOption);
+      data => {
+        this.resources = JSON.parse(JSON.stringify(data))
+        this.selectedProjectResources = this.resources.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]))
+        this.selectedProjectResources.map(resource => this.resourcesOption.push(`${resource.resourceName},${resource.resourceEmail}`));
     });
 
     this.statusForm = new FormGroup({
@@ -73,7 +72,18 @@ export class StatusFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.statusForm.value);
+    let {resource:resourceDetails, ...rest} = this.statusForm.value;
+    const statusUpdate = Object.assign(rest, 
+      {'resourceName': resourceDetails.split(',')[0], 
+      'resourceEmail': resourceDetails.split(',')[1],
+      'date': `${new Date().toLocaleDateString()}`,
+      'postedOn': `${new Date().toLocaleDateString()} ${new Date().toTimeString().split(' ')[0]}`,
+      'projectId': Number(this.router.url.split('/')[2]),
+      'resourceId': this.selectedProjectResources.filter(val => val.resourceEmail === resourceDetails.split(',')[1])[0].resourceId
+    })
+    this.projectApi.storeStatus(statusUpdate);
+    this.formService.isFormStatus.next(0);
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   cancelStatusUpdate() {
