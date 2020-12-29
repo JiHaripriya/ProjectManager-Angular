@@ -21,7 +21,7 @@ const routes: Routes = [
       {path: 'resources', children: [
         {path: '', component: ResourcesComponent, pathMatch: 'full'},
         {path: 'add', component: ResourceFormComponent},
-        {path: 'edit', component: ResourceFormComponent},
+        {path: 'edit/:id', component: ResourceFormComponent},
         {path: 'delete', component: ResourcesComponent}
       ]},
       {path: 'invoice', component: InvoiceComponent},
