@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { FormServiceService } from '../services/form-service.service';
 import { ProjectApiService } from '../services/project-api.service';
 import { ResourcesModel } from '../services/resources-model.model';
+import { StatusModel } from '../services/status-model.model';
 
 @Component({
   selector: 'app-status-form',
@@ -41,6 +42,9 @@ export class StatusFormComponent implements OnInit, OnDestroy {
   resources : ResourcesModel[];
   selectedProjectResources : ResourcesModel[];
   resourcesOption = [];
+  statusList: StatusModel[];
+  statusSubsscription: Subscription;
+  overdue = false;
 
   constructor(
     private formService: FormServiceService,
@@ -59,6 +63,11 @@ export class StatusFormComponent implements OnInit, OnDestroy {
         this.resources = JSON.parse(JSON.stringify(data))
         this.selectedProjectResources = this.resources.filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]))
         this.selectedProjectResources.map(resource => this.resourcesOption.push(`${resource.resourceName},${resource.resourceEmail}`));
+    });
+
+    this.statusSubsscription = this.projectApi.fetchStatus().subscribe(
+      data => {
+        this.statusList = JSON.parse(JSON.stringify(data)).filter((entry) => entry.projectId === JSON.parse(this.router.url.split('/')[2]));
     });
 
     this.statusForm = new FormGroup({
@@ -80,10 +89,33 @@ export class StatusFormComponent implements OnInit, OnDestroy {
       'projectId': Number(this.router.url.split('/')[2]),
       'resourceId': this.selectedProjectResources.filter(val => val.resourceEmail === resourceDetails.split(',')[1])[0].resourceId
     })
-    this.projectApi.storeStatus(statusUpdate);
-    this.projectApi.reloadComponent.next(1);
-    this.formService.isFormStatus.next(0);
-    this.router.navigate(['../'], {relativeTo: this.route});
+
+    let statusCopy = this.statusList;
+    statusCopy.push(statusUpdate);
+
+    // 16 hours time limit per resource check
+    if(this.calculateResourceWorkingHours(statusCopy, statusUpdate.date, statusUpdate.resourceEmail) <= 16){
+      this.projectApi.storeStatus(statusUpdate);
+      this.projectApi.reloadComponent.next(1);
+      this.formService.isFormStatus.next(0);
+      this.router.navigate(['../'], {relativeTo: this.route});
+    }
+    else {
+      this.overdue = true; 
+      setTimeout(() => {
+        this.overdue = false;
+        this.formService.isFormStatus.next(0);
+        this.router.navigate(['../'], {relativeTo: this.route});
+      }, 2000);
+    }   
+  }
+
+  private calculateResourceWorkingHours(resourceStatusList, date, emailId) {
+    return resourceStatusList.filter(report => report.date == date && report.resourceEmail == emailId.trim())
+            .map (resource => {
+                return Number(resource.hours) + (Number(resource.minutes)/60) 
+            })
+            .reduce((sum, value) => {return sum + value}, 0)
   }
 
   cancelStatusUpdate() {
@@ -109,5 +141,6 @@ export class StatusFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.projectsSubscription.unsubscribe();
+    this.statusSubsscription.unsubscribe();
   }
 }

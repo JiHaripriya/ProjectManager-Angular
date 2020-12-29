@@ -14,10 +14,12 @@ export class StatusComponent implements OnInit, OnDestroy {
 
   statusSubsscription: Subscription;
   reloadSubscription: Subscription;
+  overdueSubscription: Subscription;
   statusList: StatusModel[];
   dateList: string[];
   statusPerDate = {}
   loading:boolean;
+  overdue = false;
 
   constructor(
     private router: Router, 
@@ -40,6 +42,7 @@ export class StatusComponent implements OnInit, OnDestroy {
     this.reloadSubscription = this.projectApi.reloadComponent.subscribe(
       res => res == 1 ? this.ngOnInit() : 0
     )
+
   }
 
   loadStatusForm() {
