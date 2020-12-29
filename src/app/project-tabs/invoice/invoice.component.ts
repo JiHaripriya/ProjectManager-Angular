@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { ResourcesModel } from 'src/app/shared/services/resources-model.model';
   templateUrl: './invoice.component.html',
   styleUrls: ['./invoice.component.css']
 })
-export class InvoiceComponent implements OnInit {
+export class InvoiceComponent implements OnInit, OnDestroy {
   
   resourceSubcription:Subscription;
   resourceList: ResourcesModel[];
@@ -40,8 +40,14 @@ export class InvoiceComponent implements OnInit {
 
   onSubmit() {
     this.generate = true;
+    this.totalAmounts = []; // to avoid re-submission of form from adding to previous values
     this.billables.map(resource => this.totalAmounts.push(Number(resource.billableAmount) * 8 * this.invoiceForm.value.numDays))
     this.billAmount = this.totalAmounts.reduce((a, b) => Number(a) + Number(b), [])
+    this.invoiceForm.reset();
+  }
+
+  ngOnDestroy() {
+    this.resourceSubcription.unsubscribe();
   }
 
 }
