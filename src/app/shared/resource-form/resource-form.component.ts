@@ -18,6 +18,7 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
   showRate  = false;
   resourceList: ResourcesModel[];
   resourceSubcription: Subscription;
+  resourceDetails: ResourcesModel;
 
   constructor(private router:Router, private formService:FormServiceService, private projectApi: ProjectApiService) { }
 
@@ -25,16 +26,24 @@ export class ResourceFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.resourceSubcription = this.projectApi.fetchResources().subscribe(
-      data => {
-        this.resourceList = JSON.parse(JSON.stringify(data));
-        console.log('Form comp', this.resourceList)
-    });
-
-
     // Form button text 
     if(String(this.router.url).toLocaleLowerCase().includes('edit')) {
       this.buttonText = 'Update Resource';
+
+      this.resourceSubcription = this.projectApi.fetchResources().subscribe(
+        data => {
+          this.resourceList = JSON.parse(JSON.stringify(data)).filter((resource) => resource.projectId === JSON.parse(this.router.url.split('/')[2]));
+          const selectedResource = JSON.parse(this.router.url.split('/')[5]);
+          this.resourceDetails = this.resourceList.filter(resource => resource.resourceId == selectedResource)[0]
+          this.resourceForm.setValue({
+            'resourceName': this.resourceDetails.resourceName,
+            'resourceEmail': this.resourceDetails.resourceEmail,
+            'role': this.resourceDetails.role,
+            'checkboxFlag': this.resourceDetails.checkboxFlag,
+            'billableAmount': this.resourceDetails.billableAmount
+          });
+          console.log(this.resourceDetails);
+      });
     }
     else {
       this.buttonText = 'Add Resource';

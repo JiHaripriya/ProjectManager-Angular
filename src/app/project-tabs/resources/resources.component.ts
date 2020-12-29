@@ -52,7 +52,8 @@ export class ResourcesComponent implements OnInit, OnDestroy {
   editResource(resourceId: number){
     this.isDelete = false;
     this.formService.isFormStatus.next(1);
-    this.router.navigateByUrl('/resources/edit');
+    this.formService.selectedResource.next(resourceId);
+    this.router.navigate([`${this.router.url}` + '/edit/' + `${resourceId}`]);
   }
 
   deleteResource(resourceId: number) {
